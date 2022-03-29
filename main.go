@@ -1,13 +1,16 @@
 package main
 
-import "goamap.mod/db"
+import (
+	"github.com/gin-gonic/gin"
+	"goamap.mod/services"
+)
 
 func main() {
 
-	//r := gin.Default()
-	//r.GET("/:keywords/:types", func(c *gin.Context) {
-	//	api.KeyWords(c)
-	//})
-	//r.Run(":8080")
-	db.Insert()
+	r := gin.Default()
+	r.GET("/:keywords/:types", func(c *gin.Context) {
+		services.KeyWords(c)
+	})
+	r.Run(":8080")
+
 }

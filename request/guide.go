@@ -2,14 +2,13 @@ package request
 
 import (
 	"fmt"
+	"goamap.mod/conf"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"net/url"
 )
-
-const u = "https://restapi.amap.com/v3/place/text?parameters"
-const key = "264b999f57395fbbee6bcbe002115b7a"
 
 type Params struct {
 	Keywords string
@@ -18,20 +17,8 @@ type Params struct {
 
 func Send(p Params) string {
 
-	params := url.Values{}
-	Url, err := url.Parse(u)
-	if err != nil {
-		return err.Error()
-	}
-	params.Set("key", key)
-	params.Set("keywords", p.Keywords)
-	params.Set("types", p.Types)
-
-	Url.RawQuery = params.Encode()
-	urlPath := Url.String()
-	fmt.Println("url:{}", urlPath)
-
-	resp, err := http.Get(urlPath)
+	pt := urlParamEncode(p)
+	resp, err := http.Get(pt)
 
 	defer resp.Body.Close()
 
@@ -39,10 +26,32 @@ func Send(p Params) string {
 		fmt.Println("error info {}", err)
 		return err.Error()
 	}
+
 	return result(resp.Body)
 }
 
 func result(b io.ReadCloser) string {
 	body, _ := ioutil.ReadAll(b)
 	return string(body)
+}
+
+func urlParamEncode(p Params) string {
+	var c conf.GuideConf
+	c.Build()
+	fmt.Println("url:" + c.Url)
+
+	params := url.Values{}
+	Url, err := url.Parse(c.Url)
+	if err != nil {
+		log.Println("param error,info {}", err)
+	}
+
+	params.Set("key", c.Key)
+	params.Set("keywords", p.Keywords)
+	params.Set("types", p.Types)
+
+	Url.RawQuery = params.Encode()
+	urlPath := Url.String()
+	fmt.Println(urlPath)
+	return urlPath
 }
