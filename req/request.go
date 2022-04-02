@@ -2,7 +2,6 @@ package req
 
 import (
 	"encoding/json"
-	"fmt"
 	"goamap.mod/conf"
 	"goamap.mod/repo"
 	"io/ioutil"
@@ -29,7 +28,6 @@ func Do(keywords string, tp string, city string) {
 		log.Fatalf("data conversion exception err %s", err)
 		return
 	}
-	fmt.Println(data)
 	if data.Info != "ok" {
 		log.Fatalf("result data err %s", data.Info)
 		return
