@@ -31,7 +31,7 @@ func Configures() {
 	flag.Parse()
 	b, err := ioutil.ReadFile(*flg)
 	if err != nil {
-		log.Printf("read file config.yml error %s/n ", err)
+		log.Fatalf("read file config.yml error %s/n ", err)
 	}
 	er := yaml.Unmarshal(b, &Cfg)
 	if er != nil {

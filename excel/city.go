@@ -6,14 +6,10 @@ type CityCode struct {
 	CityCode string
 }
 
-var City []CityCode
 var cityCodeFilePath = "excel_file/city_code.xlsx"
 
-func init() {
-	readCityExcel()
-}
-
-func readCityExcel() {
+func ReadCityExcel() []CityCode {
+	var cits []CityCode
 	rows := readerexcel(cityCodeFilePath, "Sheet1")
 	for _, row := range rows {
 		if len(row) < 3 {
@@ -24,7 +20,7 @@ func readCityExcel() {
 			AdCode:   row[1],
 			CityCode: row[2],
 		}
-		City = append(City, cc)
+		cits = append(cits, cc)
 	}
-
+	return cits
 }

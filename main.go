@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	req.Do("", "学校", "长沙市")
+	req.DoGetPoi("长沙市")
 }

@@ -8,14 +8,10 @@ type Poi struct {
 	SCategory string
 }
 
-var PoiCode []Poi
 var poiCodeFilePath = "excel_file/poi_code.xlsx"
 
-func init() {
-	readPoiExcel()
-}
-
-func readPoiExcel() {
+func ReadPoiExcel() []Poi {
+	var p []Poi
 	rows := readerexcel(poiCodeFilePath, "amap_poicode")
 	for _, row := range rows {
 		po := Poi{
@@ -25,6 +21,7 @@ func readPoiExcel() {
 			MCategory: row[3],
 			SCategory: row[4],
 		}
-		PoiCode = append(PoiCode, po)
+		p = append(p, po)
 	}
+	return p
 }

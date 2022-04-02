@@ -22,7 +22,7 @@ func SavePoi(response *Response) {
 			InsertOne(context.TODO(), response.Poise[i])
 
 		if err != nil {
-			log.Fatalf("save data fail，data:%s", response.Poise[i][`name`])
+			log.Printf("save data fail，data:%s", response.Poise[i][`name`])
 		}
 		log.Printf("sava data successful,data:%s", response.Poise[i][`name`])
 	}
