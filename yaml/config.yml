@@ -1,0 +1,7 @@
+mongo:
+  url: "mongodb://localhost:27017"
+  db: "gomap"
+  collection: "poi"
+guide:
+  url: "https://restapi.amap.com/v3/place/text?parameters"
+  key: "f883071367b9891c8dc31e73a6386202"

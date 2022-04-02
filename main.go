@@ -1,16 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
-	"goamap.mod/services"
+	"goamap.mod/req"
 )
 
 func main() {
-
-	r := gin.Default()
-	r.GET("/:keywords/:types", func(c *gin.Context) {
-		services.KeyWords(c)
-	})
-	r.Run(":8080")
-
+	req.Do("", "学校", "长沙市")
 }
